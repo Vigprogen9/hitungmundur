@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pendaftaran Anggota Baru</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f, #f6d365, #c3f584);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #333;
+      min-height: 100vh;
+      padding-top: 80px;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 30px;
+      color: #222;
+      text-shadow: 1px 1px #fff;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .count-item {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .count-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .count-number {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ff5722;
+    }
+
+    .count-label {
+      font-size: 1rem;
+      margin-top: 8px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar dengan logo dan teks PPAB -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" />
+      <span class="logo-text">PPAB</span>
+    </div>
+  </div>
+
+  <!-- Judul -->
+  <h1>Pendaftaran Anggota Baru </h1>
+  <h2>Mohon maaf, saat ini website ini belum dapat diakses. Website akan tersedia dan dapat diakses secara penuh mulai tanggal 22 September 2025. Kami mohon pengertian dan kesabarannya, dan terima kasih atas perhatiannya.</h2>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="count-item">
+      <div class="count-number" id="days">0</div>
+      <div class="count-label">Hari</div>
+    </div>
+    <div class="count-item">
+      <div class="count-number" id="hours">0</div>
+      <div class="count-label">Jam</div>
+    </div>
+    <div class="count-item">
+      <div class="count-number" id="minutes">0</div>
+      <div class="count-label">Menit</div>
+    </div>
+    <div class="count-item">
+      <div class="count-number" id="seconds">0</div>
+      <div class="count-label">Detik</div>
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2025-09-21T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const gap = targetDate - now;
+
+      if (gap <= 0) {
+        document.querySelector(".countdown").innerHTML = "<h2>🎊 Waktu Telah Tiba! 🎊</h2>";
+        return;
+      }
+
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
+
+      const days = Math.floor(gap / day);
+      const hours = Math.floor((gap % day) / hour);
+      const minutes = Math.floor((gap % hour) / minute);
+      const seconds = Math.floor((gap % minute) / second);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
